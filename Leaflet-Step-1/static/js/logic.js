@@ -30,18 +30,18 @@ d3.json(queryUrl).then(function(data) {
     // assigns color of cirlce marker
     function getColor(depth) {
         switch (true) {
-          case depth > 50:
-            return  'orange';
-        //   case 'Regen':
-        //     return 'green';
-        //   case 'LLU':
-        //     return 'blue';
-        //   case 'Colo':
-        //     return 'purple';
-        //   case 'DMSU':
-        //     return 'blue';
-        //   default:
-        //     return 'white';
+          case depth <= 10:
+            return  'blue';
+          case depth <= 30:
+            return 'green';
+          case depth <= 50:
+            return 'yellow';
+          case depth <= 70:
+            return 'orange';
+          case depth <= 90:
+            return 'pink';
+          default:
+            return 'red';
         }
       }
 
