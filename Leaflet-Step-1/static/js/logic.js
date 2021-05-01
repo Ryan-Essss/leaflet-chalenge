@@ -31,15 +31,15 @@ d3.json(queryUrl).then(function(data) {
     function getColor(depth) {
         switch (true) {
           case depth <= 10:
-            return  'blue';
+            return  'green';
           case depth <= 30:
-            return 'green';
-          case depth <= 50:
             return 'yellow';
-          case depth <= 70:
+          case depth <= 50:
             return 'orange';
+          case depth <= 70:
+            return 'darkorange';
           case depth <= 90:
-            return 'pink';
+            return 'orangered';
           default:
             return 'red';
         }
@@ -49,7 +49,7 @@ d3.json(queryUrl).then(function(data) {
         if (mag == 0) { 
             return 1;
         }
-        return mag * 4;
+        return mag * 3;
     }      
 
     L.geoJson(data, {
@@ -69,34 +69,33 @@ d3.json(queryUrl).then(function(data) {
   }
 }).addTo(myMap);
 
+  // Set up map legend info
+  var legend = L.control({position: "bottomright"})
+  legend.onAdd = function() {
+      var div = L.DomUtil.create("div", "info legend")
+     
+     
+     var depth = [-10, 10, 30, 50, 70, 90]
+    //  var colors = [
+    //     "#008000",
+    //     "#FFFF00",
+    //     "#FFA500",
+    //     "#FF8C00",
+    //     "#FF4500",
+    //     "#FF0000"
+    //     ];
+     
+      // Looping through 
+      for (var i = 0; i < depth.length; i++) {
+          div.innerHTML +=
+            '<i style="background:' + getColor(depth[i]) + "'></i>" +
+            depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1]+'<br>':'+');
+       }
+       return div;
+     };  
+  // Add Legend to the Map
+  legend.addTo(myMap);
+
 });
 
-// // <!-- LAYERS/SITES POP UP COLOUR CIRCLE MARKERS->
-// function getColor(stype) {
-//   switch (stype) {
-//     case 'POP':
-//       return  'orange';
-//     case 'Regen':
-//       return 'green';
-//     case 'LLU':
-//       return 'blue';
-//     case 'Colo':
-//       return 'purple';
-//     case 'DMSU':
-//       return 'blue';
-//     default:
-//       return 'white';
-//   }
-// }
 
-// <!-- LAYERS/SITES ADD LAYER->
-// L.geoJson(sites, {
-//     pointToLayer: function (feature, latlng) {
-//     return new L.CircleMarker(latlng, {radius: 8, 
-//                                         fillOpacity: 1, 
-//                                         color: 'black', 
-//                                         fillColor: getColor(feature.properties.stype), 
-//                                         weight: 1,});
-//     },
-//     onEachFeature: siteslabels
-// }).addTo(map);
