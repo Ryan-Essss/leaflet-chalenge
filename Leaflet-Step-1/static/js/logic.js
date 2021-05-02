@@ -70,12 +70,11 @@ d3.json(queryUrl).then(function(data) {
   
 }).addTo(myMap);
 
-  // Set up map legend info
-  var legend = L.control({position: "bottomright"});
+var legend = L.control
+({position: "bottomright"
+});
   legend.onAdd = function() {
-      var div = L.DomUtil.create("div", "info legend")
-     
-     
+     var div = L.DomUtil.create("div", "info legend")
      var depth = [-10, 10, 30, 50, 70, 90]
      var colors = [
         "#008000",
@@ -85,18 +84,17 @@ d3.json(queryUrl).then(function(data) {
         "#FF4500",
         "#FF0000"
         ];
-     
-      // Looping through colors for legend
+      // Looping through
       for (var i = 0; i < depth.length; i++) {
           div.innerHTML +=
             '<i style="background:' + getColor(depth[i]) + "'></i>" +
             depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1]+'<br>':'+');
        }
        return div;
-     };  
+     };
   // Add Legend to the Map
   legend.addTo(myMap);
-
 });
+
 
 
