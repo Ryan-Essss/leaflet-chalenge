@@ -67,25 +67,26 @@ d3.json(queryUrl).then(function(data) {
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>" +
       "<hr><p>" + "Magnitude " + (feature.properties.mag) + "</p>");
   }
+  
 }).addTo(myMap);
 
   // Set up map legend info
-  var legend = L.control({position: "bottomright"})
+  var legend = L.control({position: "bottomright"});
   legend.onAdd = function() {
       var div = L.DomUtil.create("div", "info legend")
      
      
      var depth = [-10, 10, 30, 50, 70, 90]
-    //  var colors = [
-    //     "#008000",
-    //     "#FFFF00",
-    //     "#FFA500",
-    //     "#FF8C00",
-    //     "#FF4500",
-    //     "#FF0000"
-    //     ];
+     var colors = [
+        "#008000",
+        "#FFFF00",
+        "#FFA500",
+        "#FF8C00",
+        "#FF4500",
+        "#FF0000"
+        ];
      
-      // Looping through 
+      // Looping through colors for legend
       for (var i = 0; i < depth.length; i++) {
           div.innerHTML +=
             '<i style="background:' + getColor(depth[i]) + "'></i>" +
