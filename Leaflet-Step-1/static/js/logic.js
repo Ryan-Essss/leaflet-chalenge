@@ -70,12 +70,13 @@ d3.json(queryUrl).then(function(data) {
   
 }).addTo(myMap);
 
-var legend = L.control
-({position: "bottomright"
+var legend = L.control({
+  position: "bottomright"
 });
-  legend.onAdd = function() {
-     var div = L.DomUtil.create("div", "info legend")
-     var depth = [-10, 10, 30, 50, 70, 90]
+
+legend.onAdd = function() {
+     var div = L.DomUtil.create("div", "info legend");
+     var depth = [-10, 10, 30, 50, 70, 90];
      var colors = [
         "#008000",
         "#FFFF00",
@@ -86,9 +87,11 @@ var legend = L.control
         ];
       // Looping through
       for (var i = 0; i < depth.length; i++) {
+        console.log(colors[i])
           div.innerHTML +=
-            '<i style="background:' + getColor(depth[i]) + "'></i>" +
-            depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1]+'<br>':'+');
+            "<i style='background: " + colors[i] + "'></i>" +
+            depth[i] + (depth[i + 1] ? "&ndash;" + depth[i + 1] + "<br>" : "+");
+            console.log(i)
        }
        return div;
      };
